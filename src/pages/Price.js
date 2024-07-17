@@ -1,35 +1,28 @@
-import {useState, useEffect} from "react";
-import {useParams} from "react-router-dom"
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-export default function Price (props) {
-  // Our api key from coinapi.io.
-  const apiKey = "YOUR API KEY";
-  // Grabbing the currency symbol from the URL Params.
-  const params = useParams()
-  const symbol = params.symbol
-  // Using the other two variables to create our URL.
+export default function Price() {
+  const apiKey = "YOUR_API_KEY";
+  const params = useParams();
+  const symbol = params.symbol;
   const url = `http://rest-sandbox.coinapi.io/v1/exchangerate/${symbol}/USD?apikey=${apiKey}`;
 
-  // State to hold the coin data.
-  const [coin, setCoin] = useState("null");
+  const [coin, setCoin] = useState(null);
 
-  // Function to fetch coin data.
   const getCoin = async () => {
     try {
       const response = await fetch(url);
       const data = await response.json();
       setCoin(data);
-    } catch(e) {
-      console.error(e)
+    } catch (e) {
+      console.error(e);
     }
   };
 
-  // useEffect to run getCoin when component mounts.
   useEffect(() => {
     getCoin();
   }, []);
 
-  // loaded function for when data is fetched.
   const loaded = () => {
     return (
       <div>
@@ -41,21 +34,9 @@ export default function Price (props) {
     );
   };
 
-  // Function for when data doesn't exist.
   const loading = () => {
     return <h1>Loading...</h1>;
   };
 
-  // If coin has data, run the loaded function; otherwise, run loading.
   return coin && coin.rate ? loaded() : loading();
-}
-
-
-
-
-
-
-
-export default function Price(props) {
-  return <h1>This is the Price Component</h1>;
 }

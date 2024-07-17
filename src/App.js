@@ -1,9 +1,9 @@
-import "./index.css";
 import { Route, Routes } from "react-router-dom";
-import Currencies from "../src/pages/Currencies ";
-import Main from "../src/pages/Main ";
-import Price from "../src/pages/Price ";
-import Nav from "../src/components/Nav";
+import Currencies from "./pages/Currencies";
+import Main from "./pages/Main";
+import Price from "./pages/Price";
+import Nav from "./components/Nav";
+import "./App.css";
 
 export default function App() {
   return (
@@ -12,7 +12,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/currencies" element={<Currencies />} />
-        <Route path="/price" element={<Price />} />
+        <Route path="/price/:symbol" element={<Price />} />
       </Routes>
     </div>
   );
